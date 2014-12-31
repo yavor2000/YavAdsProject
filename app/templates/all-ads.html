@@ -1,6 +1,67 @@
 <div class="jumbotron">
     <div class="row">
-        <div class="col-md8">Ads</div>
-        <div class="col-md-4">Filters</div>
+        <!--Ads-->
+        <div class="col-md-9">
+            <ul id="adsUl">
+                <li ng-repeat="ad in data.ads">
+                    <div class="container well">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h3 class="pull-left">{{ad.title}}</h3>
+                            </div>
+                            <div class="col-md-5">
+                                <span class="pull-right">{{ad.date | date:'d-MMM-yyyy'}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="image-container">
+                                    <img src="" ng-src="{{ad.imageDataUrl}}" class="_fullImgSize"/>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    {{ad.text}}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <strong>
+                                            Name<br/>
+                                            Email:<br/>
+                                            Phone<br/>
+                                        </strong>
+                                    </div>
+                                    <div class="col-md-9">
+                                        {{ad.ownerName}}<br/>
+                                        {{ad.ownerEmail}}<br/>
+                                        {{ad.ownerPhone}}<br/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--Filters-->
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Categories</h3>
+                </div>
+                <div class="panel-body" ng-repeat="category in categories">
+                    {{category.name}}
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Towns</h3>
+                </div>
+                <div class="panel-body" ng-repeat="town in towns">
+                    {{town.name}}
+                </div>
+            </div>
+        </div>
     </div>
 </div>

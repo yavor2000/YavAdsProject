@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <title>Yav Ads</title>
   <link rel="stylesheet" href="css/bootstrap.min.united.css"/>
+  <link rel="stylesheet" href="css/app.css"/>
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-route.js"></script>
   <script src="js/app.js" defer></script>
+  <script src="services/mainPage.js" defer></script>
 </head>
 <body>
 <!--Navigation-->
-<div class="navbar navbar-default navbar-default">
+<div class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
       <a href="../" class="navbar-brand">Yav Ads App</a>
@@ -43,7 +45,9 @@
 </div>
 
 <!--Main SPA View-->
-<div id="container" class="container" ng-view=""></div>
+<div id="container" class="container">
+  <div class="container" ng-view=""></div>
+</div>
 
 
 </body>

@@ -21,9 +21,18 @@ adsApp.config(['$routeProvider', function($routeProvider) {
           templateUrl: 'templates/login.html',
           controller: 'MainController'
       })
-      .otherwise({redirectTo: '/home'});
+      .otherwise({redirectTo: '/all-ads'});
 }]);
 
-adsApp.controller('MainController', function($scope) {
-  $scope.name = 'test';
+adsApp.controller('MainController', function($scope, mainData) {
+    $scope.name = 'test';
+    mainData.getAllAds(function(resp) {
+        $scope.data = resp;
+    });
+    mainData.getAllTowns(function(resp) {
+        $scope.towns = resp;
+    });
+    mainData.getAllCategories(function(resp) {
+        $scope.categories = resp;
+    });
 });
