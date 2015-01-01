@@ -64,4 +64,15 @@
             </div>
         </div>
     </div>
+
+    <pagination class="pagination-sm"
+            total-items="totalItems"
+            items-per-page="itemsPerPage"
+            max-size="maxSize"
+            page="$parent.currentPage"
+            ng-model="currentPage"
+            boundary-links="true"
+            rotate="true"
+            ng-change="pageChanged()"></pagination>
+    <pre>Page: {{currentPage}} / {{data.numPages}}</pre>
 </div>

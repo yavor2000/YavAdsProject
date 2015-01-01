@@ -3,8 +3,8 @@
  */
 adsApp.factory('mainData', function ($http, $log) {
     return {
-        getAllAds: function (success) {
-            $http({method:'GET', url: 'http://softuni-ads.azurewebsites.net/api/ads?PageSize=10&StartPage=1'})
+        getAllAds: function (pageSize, startPage, success) {
+            $http({method:'GET', url: 'http://softuni-ads.azurewebsites.net/api/ads?PageSize='+pageSize+'&StartPage='+startPage})
                 .success(function(data) { //data, status, headers, config
                 // this callback will be called asynchronously
                 // when the response is available

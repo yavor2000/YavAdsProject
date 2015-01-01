@@ -1,5 +1,5 @@
 var adsApp = angular.module('adsApp', [
-  'ngRoute'
+  'ngRoute', 'ui.bootstrap'
 ]);
 
 adsApp.config(['$routeProvider', function($routeProvider) {
@@ -10,6 +10,10 @@ adsApp.config(['$routeProvider', function($routeProvider) {
         controller: 'MainController'
       })
       .when('/all-ads', {
+          templateUrl: 'templates/all-ads.html',
+          controller: 'MainController'
+      })
+      .when('/all-ads/page=:page', {
           templateUrl: 'templates/all-ads.html',
           controller: 'MainController'
       })
@@ -24,10 +28,29 @@ adsApp.config(['$routeProvider', function($routeProvider) {
       .otherwise({redirectTo: '/all-ads'});
 }]);
 
-adsApp.controller('MainController', function($scope, mainData) {
-    $scope.name = 'test';
-    mainData.getAllAds(function(resp) {
+adsApp.controller('MainController', function($scope, $location, $routeParams, mainData) {
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+        $location.path('/all-ads/page='+pageNo);
+    };
+
+    $scope.currentPage = 1;
+    $scope.totalItems = 99999999; // will be updated on ads load but of not set will cause setPage to 1
+    $scope.maxSize = 5; // number of pages in pagination control
+    $scope.itemsPerPage = 5;
+
+    if ($routeParams.page && $routeParams.page>0 ) {
+        $scope.currentPage = $routeParams.page;
+    }
+
+    $scope.pageChanged = function() {
+        console.log('Page changed to: ' + $scope.currentPage);
+        $location.path('/all-ads/page='+$scope.currentPage);
+    };
+
+    mainData.getAllAds($scope.itemsPerPage, $scope.currentPage, function(resp) {
         $scope.data = resp;
+        $scope.totalItems = $scope.data.numItems;
     });
     mainData.getAllTowns(function(resp) {
         $scope.towns = resp;
@@ -35,4 +58,11 @@ adsApp.controller('MainController', function($scope, mainData) {
     mainData.getAllCategories(function(resp) {
         $scope.categories = resp;
     });
+
+    //$scope.$watch('currentPage + itemsPerPage', function() {
+    //    var begin = (($scope.currentPage - 1) * $scope.itemsPerPage)
+    //        , end = begin + $scope.itemsPerPage;
+    //    //$scope.filteredTodos = $scope.todos.slice(begin, end);
+    //});
 });
+
