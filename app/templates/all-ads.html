@@ -1,7 +1,24 @@
 <div class="jumbotron">
     <div class="row">
+        <!--Home guest-->
+        <div class="col-md-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Welcome guest</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <span>To publish a new ad, please login.</span>
+                    <br/>
+                    <br/>
+                    <div class="btn-group-vertical">
+                        <a href="#/login" class="btn btn-primary center-block">Login</a>
+                        <a href="#/register" class="btn btn-primary center-block">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--Ads-->
-        <div class="col-md-9">
+        <div class="col-md-7">
             <ul id="adsUl">
                 <li ng-repeat="ad in data.ads">
                     <div class="container well">

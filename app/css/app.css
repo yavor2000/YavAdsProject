@@ -1,10 +1,33 @@
 /* app css stylesheet */
+._vertical-align {
+  display: flex;
+  align-items: center;
+}
+
+._row-5-gutter {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+._col-5-gutter{
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+._container {
+  padding-left:30px;
+  padding-right:30px;
+}
 body {
   padding-top: 50px;
 }
 
-#adsUl {
+#adsUl, #categoryUl, #townUl {
   list-style: none;
+  padding-left: 0;
+}
+
+#categoryUl .list-group-item, #townUl .list-group-item {
+  padding: 5px 10px;
 }
 
 ._fullImgSize {
@@ -13,31 +36,6 @@ body {
   border-radius: 5px;
 }
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
-}
+/*ul .active {*/
+  /*background-color: #e3e3e3;*/
+/*}*/
