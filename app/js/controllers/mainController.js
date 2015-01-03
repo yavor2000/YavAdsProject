@@ -2,6 +2,8 @@
  * Created by Yavor on 31.12.2014 г..
  */
 adsApp.controller('MainController', function($scope, $rootScope, $location, $routeParams, mainData) {
+    $rootScope.$broadcast('changeNavTitle', 'Ads - Home');
+
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
         $location.path('/home/page='+pageNo);

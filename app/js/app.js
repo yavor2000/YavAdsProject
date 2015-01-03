@@ -1,5 +1,5 @@
 var adsApp = angular.module('adsApp', [
-  'ngRoute', 'ui.bootstrap'
+  'ngRoute', 'ui.bootstrap', 'ngCookies'
 ]);
 
 adsApp.config(['$routeProvider', function($routeProvider) {
@@ -27,7 +27,7 @@ adsApp.config(['$routeProvider', function($routeProvider) {
       })
       .when('/login', {
           templateUrl: 'templates/login.html',
-          controller: 'MainController'
+          controller: 'LoginController'
       })
       .otherwise({redirectTo: '/home'});
 }]);
