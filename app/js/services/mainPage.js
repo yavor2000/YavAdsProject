@@ -1,7 +1,7 @@
 /**
  * Created by Yavor on 31.12.2014 г..
  */
-adsApp.factory('mainData', function ($http, $log, $rootScope) {
+adsApp.factory('mainData', function ($http, $log, $rootScope, growl) {
     var baseUrl = 'http://softuni-ads.azurewebsites.net/';
     //var baseUrl = 'http://localhost:1337/';
     return {
@@ -17,6 +17,7 @@ adsApp.factory('mainData', function ($http, $log, $rootScope) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
                     $log.warn(data);
+                    growl.error(data.error_description);
                 })
                 .finally(function(){
                     $rootScope.$broadcast('isLoading', false);
@@ -48,21 +49,25 @@ adsApp.factory('mainData', function ($http, $log, $rootScope) {
                 })
                 .error(function(data) {
                     $log.warn(data);
+                    growl.error(data.error_description);
                 })
                 .finally(function () {
                     $rootScope.$broadcast('isLoading', false);
                 });
         },
-        login: function (user, success) {
+        login: function (user, onSuccess, onError) {
             $http({method:'POST',
                 url: baseUrl + 'api/user/login',
                 data: JSON.stringify(user)})
                 .success(function(data, status, headers, config) {
                     console.log('logged in');
-                    success(data, status, headers(), config);
+                    growl.success('Login is successful :)');
+                    onSuccess(data, status, headers(), config);
                 })
                 .error(function(data) {
                     $log.warn(data);
+                    //onError(data);
+                    growl.error(data.error_description);
                 })
                 .finally(function () {
                     $rootScope.$broadcast('isLoading', false);

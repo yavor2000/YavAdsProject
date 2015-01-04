@@ -1,6 +1,11 @@
 var adsApp = angular.module('adsApp', [
-  'ngRoute', 'ui.bootstrap', 'ngCookies'
+  'ngRoute', 'ui.bootstrap', 'ngCookies', 'angular-growl'
 ]);
+
+adsApp.config(["growlProvider", "$httpProvider", function(growlProvider, $httpProvider) {
+    growlProvider.globalTimeToLive(4000);
+    growlProvider.onlyUniqueMessages(true);
+}]);
 
 adsApp.config(['$routeProvider', function($routeProvider) {
 
@@ -23,7 +28,7 @@ adsApp.config(['$routeProvider', function($routeProvider) {
       })
       .when('/register', {
           templateUrl: 'templates/register.html',
-          controller: 'MainController'
+          controller: 'RegisterController'
       })
       .when('/login', {
           templateUrl: 'templates/login.html',

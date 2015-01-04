@@ -8,13 +8,10 @@ adsApp.controller('LoginController', function($scope, $rootScope, $cookieStore, 
         console.log($scope.user);
         mainData.login($scope.user,
             function (data, status, headers, config) {
-                console.log(status);
-                console.log(data);
                 $scope.userData = data;
                 $cookieStore.put('access_token', $scope.userData.access_token);
                 $cookieStore.put('username', $scope.userData.username);
                 $scope.username = $cookieStore.get('username');
-
             },
             function (error) {
 

@@ -4,18 +4,23 @@
   <meta charset="UTF-8">
   <title>Yav Ads</title>
   <link rel="stylesheet" href="css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/angular-growl.css"/>
   <link rel="stylesheet" href="css/app.css"/>
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-route.js"></script>
   <script src="lib/angular/angular-cookies.js"></script>
+  <script src="lib/angular/angular-growl.js"></script>
   <script src="lib/uibootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
   <script src="js/app.js" defer></script>
   <script src="js/controllers/mainController.js" defer></script>
   <script src="js/controllers/headerController.js" defer></script>
   <script src="js/controllers/loginController.js" defer></script>
+  <script src="js/controllers/registerController.js" defer></script>
   <script src="js/services/mainPage.js" defer></script>
 </head>
 <body>
+<!--notification div for growl-->
+<div growl></div>
 <!--Navigation-->
 <div class="navbar navbar-default navbar-fixed-top" ng-controller="HeaderController" ng-include="template.url">
   <div class="container">
