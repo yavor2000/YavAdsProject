@@ -1,5 +1,5 @@
 var adsApp = angular.module('adsApp', [
-  'ngRoute', 'ui.bootstrap', 'ngCookies', 'ngResource', 'angular-growl'
+  'ngRoute', 'ui.bootstrap', 'ngCookies', 'ngResource', 'angular-growl', 'ngAnimate'
 ]);
 
 adsApp.constant('baseServiceUrl', 'http://softuni-ads.azurewebsites.net');
@@ -8,6 +8,7 @@ adsApp.constant('baseServiceUrl', 'http://softuni-ads.azurewebsites.net');
 adsApp.config(["growlProvider", "$httpProvider", function(growlProvider, $httpProvider) {
     growlProvider.globalTimeToLive(3000);
     growlProvider.onlyUniqueMessages(true);
+    growlProvider.globalPosition('top-center');
 }]);
 
 adsApp.config(['$routeProvider', function($routeProvider) {

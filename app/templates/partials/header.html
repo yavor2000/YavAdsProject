@@ -1,0 +1,29 @@
+<div class="navbar-header">
+    <a href="#/home" class="navbar-brand">Yav Ads App</a>
+</div>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav" ng-if="authService.isAnonymous()">
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/login">Login</a></li>
+        <li><a href="#/register">Register</a></li>
+    </ul>
+    <ul class="nav navbar-nav" ng-if="authService.isLoggedIn()">
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/user/ads">My Ads</a></li>
+        <li><a href="#/user/ads/publish">Publish New Ad</a></li>
+        <li><a href="#/user/profile">Edit profile</a></li>
+    </ul>
+    <ul class="nav navbar-nav" ng-if="authService.isAdmin()">
+        <li><a href="#/admin/ads">Ads</a></li>
+        <li><a href="#/admin/users">Users</a></li>
+        <li><a href="#/admin/categories">Categories</a></li>
+        <li><a href="#/admin/towns">Towns</a></li>
+    </ul>
+    <h4 class="navbar-text text-center">Ads<span ng-if="pageTitle"> &ndash; {{pageTitle}}</span></h4>
+    <ul class="nav navbar-nav navbar-right" ng-if="authService.isLoggedIn()">
+        <li><h4 class="navbar-text text-center">{{authService.getCurrentUser().username}}</h4></li>
+        <li><a ng-click="logout()" class="navbar-link">Logout</a></li>
+    </ul>
+</div>
+
+

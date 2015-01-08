@@ -21,7 +21,7 @@ body {
   padding-top: 50px;
 }
 
-#adsUl, #categoryUl, #townUl {
+.listNoStyle {
   list-style: none;
   padding-left: 0;
 }
@@ -36,6 +36,11 @@ body {
   border-radius: 5px;
 }
 
-/*ul .active {*/
-  /*background-color: #e3e3e3;*/
+/*.navbar-header {*/
+  /*float: left;*/
+  /*padding: 15px;*/
+  /*text-align: center;*/
+  /*color: #ffffff;*/
+  /*width: 100%;*/
 /*}*/
+/*.navbar-brand {float:none;}*/

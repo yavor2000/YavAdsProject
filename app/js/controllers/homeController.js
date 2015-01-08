@@ -1,7 +1,7 @@
 /**
  * Created by Yavor on 31.12.2014 г..
  */
-adsApp.controller('HomeController', function($scope, $rootScope, $location, $routeParams, adsService, filterService, growl, $cookieStore) {
+adsApp.controller('HomeController', function($scope, $rootScope, $location, $routeParams, adsService, filterService, authService, growl, $cookieStore) {
     $rootScope.$broadcast('changeNavTitle', 'Ads - Home');
 
     $scope.adsParams = $cookieStore.get('adsParams') || {

@@ -1,25 +1,12 @@
 <div class="jumbotron">
     <div class="row">
-        <!--Home guest-->
+        <!--Navigation == left side bar-->
         <div class="col-md-2">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Welcome guest</h3>
-                </div>
-                <div class="panel-body text-center">
-                    <small class="text-info">To publish a new ad, please login.</small>
-                    <br/>
-                    <br/>
-                    <div class="btn-group-vertical">
-                        <a href="#/login" class="btn btn-primary center-block">Login</a>
-                        <a href="#/register" class="btn btn-primary center-block">Register</a>
-                    </div>
-                </div>
-            </div>
+            <div ng-include="'templates/partials/navigation-side-bar.html'"></div>
         </div>
-        <!--Ads-->
-        <div class="col-md-7">
 
+        <!--Ads - prerequisites-->
+        <div class="col-md-7">
             <!--loading warning-->
             <div ng-if="dataLoading" class="panel panel-warning">
                 <div class="panel-heading">
@@ -55,13 +42,12 @@
                                     boundary-links="true"
                                     rotate="true"
                                     ng-change="pageChanged()"></pagination>
-
                         <!--<div class="alert alert-dismissable alert-info">Page: {{currentPage}} / {{data.numPages}}</div>-->
                     </div>
                 </div>
             </div>
 
-            <!--ads-->
+            <!--ads - main content-->
             <ul id="adsUl" class="panel-default">
                 <li ng-repeat="ad in data.ads">
                     <div class="container well">
@@ -112,35 +98,7 @@
         </div>
         <!--Filters-->
         <div class="col-md-3">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Categories</h3>
-                </div>
-                <ul id="categoryUl">
-                    <li class="list-group-item" ng-click="categoryClicked(null)" ng-class="{'active' : adsParams.categoryId == null}">All</li>
-                    <li class="list-group-item"
-                        ng-repeat="category in categories"
-                        ng-click="categoryClicked(category.id)"
-                        ng-class="{'active' : adsParams.categoryId == category.id}">
-                        {{category.name}}
-                    </li>
-                </ul>
-            </div>
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Towns</h3>
-                </div>
-                <ul id="townUl">
-                    <li class="list-group-item" ng-click="townClicked(null)" ng-class="{'active' : adsParams.townId == null}">All</li>
-                    <li class="list-group-item"
-                        ng-repeat="town in towns"
-                        ng-click="townClicked(town.id)"
-                        ng-class="{'active' : adsParams.townId == town.id}">
-                        {{town.name}}
-                    </li>
-                </ul>
-            </div>
+            <div ng-include="'templates/partials/filter-side-bar.html'"></div>
         </div>
     </div>
-
 </div>

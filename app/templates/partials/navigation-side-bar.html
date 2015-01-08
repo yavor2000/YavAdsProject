@@ -1,0 +1,49 @@
+<!-- Navigation box for anonymous site visitors -->
+<div ng-if="authService.isAnonymous()" class="box">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Welcome guest</h3>
+        </div>
+        <div class="panel-body text-center">
+            <small class="text-info">To publish a new ad, please login.</small>
+            <br/>
+            <br/>
+            <div class="btn-group-vertical">
+                <a href="#/login" class="btn btn-primary center-block">Login</a>
+                <a href="#/register" class="btn btn-primary center-block">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation box for logged in normal users (not admins) -->
+<div ng-if="authService.isNormalUser()" class="box">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Navigation</h3>
+        </div>
+        <ul class="listNoStyle">
+            <li class="list-group-item"><a href="#/">Home</a></li>
+            <li class="list-group-item"><a href="#/user/ads">My Ads</a></li>
+            <li class="list-group-item"><a href="#/user/ads/publish">Publish New Ad</a></li>
+            <li class="list-group-item"><a href="#/user/profile">Edit Profile</a></li>
+            <li class="list-group-item"><a ng-click="logout()">Logout</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Navigation box for logged in admins -->
+<div ng-if="authService.isAdmin()" class="box">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Administrator</h3>
+        </div>
+        <ul class="listNoStyle">
+            <li class="list-group-item"><a href="#/admin/ads">Ads</a></li>
+            <li class="list-group-item"><a href="#/admin/users">Users</a></li>
+            <li class="list-group-item"><a href="#/admin/categories">Categories</a></li>
+            <li class="list-group-item"><a href="#/admin/towns">Towns</a></li>
+            <li class="list-group-item"><a ng-click="logout()">Logout</a></li>
+        </ul>
+    </div>
+</div>

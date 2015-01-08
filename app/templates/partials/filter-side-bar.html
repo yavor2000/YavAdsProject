@@ -1,0 +1,28 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Categories</h3>
+    </div>
+    <ul id="categoryUl" class="listNoStyle">
+        <li class="list-group-item" ng-click="categoryClicked(null)" ng-class="{'active' : adsParams.categoryId == null}">All</li>
+        <li class="list-group-item"
+            ng-repeat="category in categories"
+            ng-click="categoryClicked(category.id)"
+            ng-class="{'active' : adsParams.categoryId == category.id}">
+            {{category.name}}
+        </li>
+    </ul>
+</div>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Towns</h3>
+    </div>
+    <ul id="townUl" class="listNoStyle">
+        <li class="list-group-item" ng-click="townClicked(null)" ng-class="{'active' : adsParams.townId == null}">All</li>
+        <li class="list-group-item"
+            ng-repeat="town in towns"
+            ng-click="townClicked(town.id)"
+            ng-class="{'active' : adsParams.townId == town.id}">
+            {{town.name}}
+        </li>
+    </ul>
+</div>
