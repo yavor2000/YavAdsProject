@@ -19,6 +19,7 @@
         </div>
         <!--Ads-->
         <div class="col-md-7">
+
             <!--loading warning-->
             <div ng-if="dataLoading" class="panel panel-warning">
                 <div class="panel-heading">
@@ -31,6 +32,35 @@
                     <h2 class="panel-title">No ads to display</h2>
                 </div>
             </div>
+            <div ng-if="data.ads.length>0" class="row _vertical-align">
+                <div class="col-md-4">
+                    <!--ads per page selector-->
+                    <span>Ads per page: </span>
+                    <select ng-model="adsParams.pageSize" class="ng-valid ng-dirty ng-touched" ng-change="pageSizeChanged()">
+                        <option value="2" label="2">2</option>
+                        <option value="5" label="5">5</option>
+                        <option value="10" selected="selected" label="10">10</option>
+                    </select>
+                    <span ng-if="data.numPages>0">Page: {{adsParams.startPage}} / {{data.numPages}}</span>
+                </div>
+                <div class="col-md-8">
+                    <!--pagination-->
+                    <div class="text-center">
+                        <pagination class="pagination-sm"
+                                    total-items="totalItems"
+                                    items-per-page="adsParams.pageSize"
+                                    max-size="5"
+                                    page="adsParams.startPage"
+                                    ng-model="adsParams.startPage"
+                                    boundary-links="true"
+                                    rotate="true"
+                                    ng-change="pageChanged()"></pagination>
+
+                        <!--<div class="alert alert-dismissable alert-info">Page: {{currentPage}} / {{data.numPages}}</div>-->
+                    </div>
+                </div>
+            </div>
+
             <!--ads-->
             <ul id="adsUl" class="panel-default">
                 <li ng-repeat="ad in data.ads">
@@ -87,11 +117,11 @@
                     <h3 class="panel-title">Categories</h3>
                 </div>
                 <ul id="categoryUl">
-                    <li class="list-group-item" ng-click="categoryClicked('all')" ng-class="getCategoryClass('all')">All</li>
+                    <li class="list-group-item" ng-click="categoryClicked(null)" ng-class="{'active' : adsParams.categoryId == null}">All</li>
                     <li class="list-group-item"
                         ng-repeat="category in categories"
                         ng-click="categoryClicked(category.id)"
-                        ng-class="getCategoryClass(category.id)">
+                        ng-class="{'active' : adsParams.categoryId == category.id}">
                         {{category.name}}
                     </li>
                 </ul>
@@ -101,29 +131,16 @@
                     <h3 class="panel-title">Towns</h3>
                 </div>
                 <ul id="townUl">
-                    <li class="list-group-item" ng-click="townClicked('all')" ng-class="getTownClass('all')">All</li>
+                    <li class="list-group-item" ng-click="townClicked(null)" ng-class="{'active' : adsParams.townId == null}">All</li>
                     <li class="list-group-item"
                         ng-repeat="town in towns"
                         ng-click="townClicked(town.id)"
-                        ng-class="getTownClass(town.id)">
+                        ng-class="{'active' : adsParams.townId == town.id}">
                         {{town.name}}
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <!--pagination-->
-    <div class="row text-center">
-        <pagination class="pagination-sm"
-                    total-items="totalItems"
-                    items-per-page="itemsPerPage"
-                    max-size="maxSize"
-                    page="$parent.currentPage"
-                    ng-model="currentPage"
-                    boundary-links="true"
-                    rotate="true"
-                    ng-change="pageChanged()"></pagination>
-        <pre>Page: {{currentPage}} / {{data.numPages}}</pre>
-        <!--<div class="alert alert-dismissable alert-info">Page: {{currentPage}} / {{data.numPages}}</div>-->
-    </div>
+
 </div>

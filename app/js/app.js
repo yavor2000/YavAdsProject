@@ -1,30 +1,29 @@
 var adsApp = angular.module('adsApp', [
-  'ngRoute', 'ui.bootstrap', 'ngCookies', 'angular-growl'
+  'ngRoute', 'ui.bootstrap', 'ngCookies', 'ngResource', 'angular-growl'
 ]);
 
+adsApp.constant('baseServiceUrl', 'http://softuni-ads.azurewebsites.net');
+//adsApp.constant('baseServiceUrl', 'http://localhost:1337');
+
 adsApp.config(["growlProvider", "$httpProvider", function(growlProvider, $httpProvider) {
-    growlProvider.globalTimeToLive(4000);
+    growlProvider.globalTimeToLive(3000);
     growlProvider.onlyUniqueMessages(true);
 }]);
 
 adsApp.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider
+      .when('/', {
+          templateUrl: 'templates/home.html',
+          controller: 'HomeController'
+      })
       .when('/home', {
         templateUrl: 'templates/home.html',
-        controller: 'MainController'
+        controller: 'HomeController'
       })
       .when('/home/page=:page', {
           templateUrl: 'templates/home.html',
-          controller: 'MainController'
-      })
-      .when('/all-ads', {
-          templateUrl: 'templates/home.html',
-          controller: 'MainController'
-      })
-      .when('/all-ads/page=:page', {
-          templateUrl: 'templates/home.html',
-          controller: 'MainController'
+          controller: 'HomeController'
       })
       .when('/register', {
           templateUrl: 'templates/register.html',
