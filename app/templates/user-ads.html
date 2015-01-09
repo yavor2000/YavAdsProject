@@ -1,0 +1,112 @@
+<div class="jumbotron">
+    <div class="row">
+        <!--Navigation == left side bar-->
+        <div class="col-md-2">
+            <div ng-include="'templates/partials/navigation-side-bar.html'"></div>
+            <div ng-include="'templates/partials/myAds-side-bar.html'"></div>
+        </div>
+
+        <!--Ads - prerequisites-->
+        <div class="col-md-10">
+            <!--loading warning-->
+            <div ng-if="dataLoading" class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Loading ads...</h3>
+                </div>
+                <div class="text-center"><img src="images/ajax-loader.gif" alt="loading..."/></div>
+            </div>
+            <!--no ads warning-->
+            <div ng-if="data.ads.length==0 && !dataLoading" class="panel panel-info">
+                <div class="panel-heading">
+                    <h2 class="panel-title">No ads to display</h2>
+                </div>
+            </div>
+            <div ng-if="data.ads.length>0" class="row _vertical-align">
+                <div class="col-md-4">
+                    <!--ads per page selector-->
+                    <span>Ads per page: </span>
+                    <select ng-model="userAdsParams.pageSize" class="ng-valid ng-dirty ng-touched" ng-change="pageSizeChanged()">
+                        <option value="2" label="2">2</option>
+                        <option value="5" label="5" selected="selected">5</option>
+                        <option value="10" label="10">10</option>
+                    </select>
+                    <span ng-if="data.numPages>0">Page: {{userAdsParams.startPage}} / {{data.numPages}}</span>
+                </div>
+                <div class="col-md-8">
+                    <!--pagination-->
+                    <div class="text-center">
+                        <pagination class="pagination-sm"
+                                    total-items="totalItems"
+                                    items-per-page="userAdsParams.pageSize"
+                                    max-size="5"
+                                    page="userAdsParams.startPage"
+                                    ng-model="userAdsParams.startPage"
+                                    boundary-links="true"
+                                    rotate="true"
+                                    ng-change="pageChanged()"></pagination>
+                    </div>
+                </div>
+            </div>
+
+            <!--ads - main content-->
+            <ul id="adsUl" class="panel-default listNoStyle">
+                <li ng-repeat="ad in data.ads">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="container well">
+                                <div class="row _vertical-align">
+                                    <div class="col-md-9">
+                                        <h3 class="pull-left">{{ad.title}}</h3>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="pull-right">{{ad.date | date:'d-MMM-yyyy'}}</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="image-container">
+                                            <img ng-if="ad.imageDataUrl!=null" src="" ng-src="{{ad.imageDataUrl}}" class="_fullImgSize"/>
+                                            <img ng-if="ad.imageDataUrl==null" src="images/NoImageSoftUni.jpg" alt="no image" class="_fullImgSize"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="row well well-sm">
+                                            {{ad.text}}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 _col-5-gutter">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item list-group-item-info">Category</li>
+                                                    <li class="list-group-item list-group-item-info">Town</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-9 _col-5-gutter">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item list-group-item-success">{{ad.categoryName}}</li>
+                                                    <li class="list-group-item list-group-item-success">{{ad.townName}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 text-center">
+                            <h4>Status:</h4>
+                            <div class="list-group-item">{{ad.status}}</div>
+                            <div ng-if="ad.status=='Published' || ad.status=='WaitingApproval'" class="btn btn-primary _marginTB">deactivate</div>
+                            <div ng-if="ad.status=='Inactive'">
+                                <div class="btn btn-primary _marginTB">Edit</div>
+                                <div class="btn btn-primary _marginTB">Publish again</div>
+                                <div class="btn btn-primary _marginTB">Delete</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

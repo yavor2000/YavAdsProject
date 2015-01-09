@@ -1,0 +1,15 @@
+<!-- Navigation box user ads -->
+<div ng-if="authService.isNormalUser()" class="box">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">My Ads</h3>
+        </div>
+        <ul class="listNoStyle">
+            <li><a class="list-group-item" ng-click="statusMenuClicked(undefined)" ng-class="{'active' : statusMenuId == undefined}" href="">All</a></li>
+            <li><a class="list-group-item" ng-click="statusMenuClicked(2)" ng-class="{'active' : statusMenuId == 2}"href="">Published</a></li>
+            <li><a class="list-group-item" ng-click="statusMenuClicked(1)" ng-class="{'active' : statusMenuId == 1}"href="">Waiting Approval</a></li>
+            <li><a class="list-group-item" ng-click="statusMenuClicked(0)" ng-class="{'active' : statusMenuId == 0}"href="">Inactive</a></li>
+            <li><a class="list-group-item" ng-click="statusMenuClicked(3)" ng-class="{'active' : statusMenuId == 3}"href="">Rejected</a></li>
+        </ul>
+    </div>
+</div>

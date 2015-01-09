@@ -2,7 +2,13 @@
  * Created by Yavor on 08.01.2015 г..
  */
 adsApp.factory('authService',
-    function ($http, baseServiceUrl) {
+    function ($http, $cookieStore, baseServiceUrl) {
+        function clearNavData() {
+            $cookieStore.remove('adsParams');
+            $cookieStore.remove('navMenuId');
+            $cookieStore.remove('statusMenuId');
+        }
+
         return {
             login: function(userData, success, error) {
                 var request = {
@@ -13,6 +19,7 @@ adsApp.factory('authService',
                 $http(request).success(function(data) {
                     sessionStorage['currentUser'] = JSON.stringify(data);
                     success(data);
+                    clearNavData();
                 }).error(error);
             },
 
@@ -25,11 +32,13 @@ adsApp.factory('authService',
                 $http(request).success(function(data) {
                     sessionStorage['currentUser'] = JSON.stringify(data);
                     success(data);
+                    clearNavData();
                 }).error(error);
             },
 
             logout: function() {
                 delete sessionStorage['currentUser'];
+                clearNavData();
             },
 
             getCurrentUser : function() {
@@ -64,6 +73,12 @@ adsApp.factory('authService',
                     headers['Authorization'] = 'Bearer ' + currentUser.access_token;
                 }
                 return headers;
+            },
+            getAccessToken : function() {
+                var currentUser = this.getCurrentUser();
+                if (currentUser) {
+                    return currentUser.access_token;
+                }
             }
         }
     }

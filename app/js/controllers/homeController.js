@@ -10,6 +10,13 @@ adsApp.controller('HomeController', function($scope, $rootScope, $location, $rou
         pageSize: 5
     };
 
+    $scope.navMenuId = $cookieStore.get('navMenuId') || 0;
+
+    $scope.navMenuClicked = function (id) {
+        $scope.navMenuId = id;
+        $cookieStore.put('navMenuId', id);
+    };
+
     $scope.setPage = function (pageNo) {
         $scope.adsParams.startPage = pageNo;
         $cookieStore.put('adsParams', $scope.adsParams);
@@ -29,7 +36,7 @@ adsApp.controller('HomeController', function($scope, $rootScope, $location, $rou
 
     $scope.pageSizeChanged = function() {
         $cookieStore.put('adsParams', $scope.adsParams);
-        reloadsAllAds();
+        reloadAllAds();
     };
 
     $scope.dataLoading = false;
@@ -51,14 +58,14 @@ adsApp.controller('HomeController', function($scope, $rootScope, $location, $rou
         growl.error(error.error_description, {ttl: 5000});
     });
 
-    reloadsAllAds();
+    reloadAllAds();
 
     $scope.categoryClicked = function (categorySelected) {
         if (categorySelected != $scope.adsParams.categoryId) {
             $scope.adsParams.categoryId = categorySelected;
             $scope.adsParams.startPage = 1;
             $cookieStore.put('adsParams', $scope.adsParams);
-            reloadsAllAds();
+            reloadAllAds();
             $location.path('/home/page='+$scope.adsParams.startPage);
         }
     };
@@ -68,12 +75,12 @@ adsApp.controller('HomeController', function($scope, $rootScope, $location, $rou
             $scope.adsParams.townId = townSelected;
             $scope.adsParams.startPage = 1;
             $cookieStore.put('adsParams', $scope.adsParams);
-            reloadsAllAds();
+            reloadAllAds();
             $location.path('/home/page='+$scope.adsParams.startPage);
         }
     };
 
-    function reloadsAllAds () {
+    function reloadAllAds () {
         adsService.getAllAds(
             $scope.adsParams,
             function(resp) {

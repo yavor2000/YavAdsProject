@@ -37,3 +37,44 @@ adsApp.factory('filterService', function ($resource, baseServiceUrl) {
         }
     }
 });
+
+adsApp.factory('userAdsService', function ($resource, $rootScope, $log, $http, authService, baseServiceUrl) {
+
+    function getMyAds(success, error, adStatus, startPage, pageSize ) {
+
+        var statusStr = '',
+            startPageStr = '',
+            pageSizeStr = '';
+        if(adStatus >= 0) {
+            statusStr = 'Status=' + adStatus + '&';
+        }
+
+        if(startPage > 0) {
+            startPageStr = 'StartPage=' + startPage + '&';
+        }
+
+        if(pageSize > 0) {
+            pageSizeStr = 'PageSize=' + pageSize;
+        }
+
+        var request = {
+            method: 'GET',
+            headers: authService.getAuthHeaders(),
+            url: baseServiceUrl + '/api/user/ads?' + statusStr + startPageStr + pageSizeStr
+        };
+        $rootScope.$broadcast('isLoading', true);
+        $http(request).success(function(data) {
+            success(data);
+        }).error(function (data, status, headers, config) {
+            $log.warn(data);
+        })
+            .finally(function(){
+                $rootScope.$broadcast('isLoading', false);
+            });
+    }
+
+    return {
+        getUserAds: getMyAds
+    }
+
+});

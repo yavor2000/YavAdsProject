@@ -23,11 +23,11 @@
             <h3 class="panel-title">Navigation</h3>
         </div>
         <ul class="listNoStyle">
-            <li class="list-group-item"><a href="#/">Home</a></li>
-            <li class="list-group-item"><a href="#/user/ads">My Ads</a></li>
-            <li class="list-group-item"><a href="#/user/ads/publish">Publish New Ad</a></li>
-            <li class="list-group-item"><a href="#/user/profile">Edit Profile</a></li>
-            <li class="list-group-item"><a ng-click="logout()">Logout</a></li>
+            <li><a class="list-group-item" ng-click="navMenuClicked(0)" ng-class="{'active' : navMenuId == 0}"href="#/">Home</a></li>
+            <li><a class="list-group-item" ng-click="navMenuClicked(1)" ng-class="{'active' : navMenuId == 1}"href="#/user/ads">My Ads</a></li>
+            <li><a class="list-group-item" ng-click="navMenuClicked(2)" ng-class="{'active' : navMenuId == 2}"href="#/user/ads/publish">Publish New Ad</a></li>
+            <li><a class="list-group-item" ng-click="navMenuClicked(3)" ng-class="{'active' : navMenuId == 3}"href="#/user/profile">Edit Profile</a></li>
+            <li><a class="list-group-item" ng-class="{'active' : navMenuId == 4}" ng-click="logout()">Logout</a></li>
         </ul>
     </div>
 </div>

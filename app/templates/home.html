@@ -8,10 +8,11 @@
         <!--Ads - prerequisites-->
         <div class="col-md-7">
             <!--loading warning-->
-            <div ng-if="dataLoading" class="panel panel-warning">
+            <div ng-if="dataLoading" class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">Loading ads...</h3>
                 </div>
+                <div class="text-center"><img src="images/ajax-loader.gif" alt="loading..."/></div>
             </div>
             <!--no ads warning-->
             <div ng-if="data.ads.length==0 && !dataLoading" class="panel panel-warning">
@@ -63,7 +64,7 @@
                             <div class="col-md-5">
                                 <div class="image-container">
                                     <img ng-if="ad.imageDataUrl!=null" src="" ng-src="{{ad.imageDataUrl}}" class="_fullImgSize"/>
-                                    <img ng-if="ad.imageDataUrl==null" src="templates/NoImageSoftUni.jpg" alt="no image" class="_fullImgSize"/>
+                                    <img ng-if="ad.imageDataUrl==null" src="images/NoImageSoftUni.jpg" alt="no image" class="_fullImgSize"/>
                                     <!--<div ng-if="ad.imageDataUrl==null" class="list-group-item list-group-item-warning">No image!</div>-->
                                 </div>
                             </div>
