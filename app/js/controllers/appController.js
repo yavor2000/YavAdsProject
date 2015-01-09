@@ -12,5 +12,11 @@ adsApp.controller('AppController',
             growl.success("Logout successful");
             $location.path('/');
         };
+
+        //$scope.pageTitle = $scope.pageTitle || 'Guest Home';
+
+        //$scope.$on('changePageTitle', function (event, newTitle) {
+        //    $scope.pageTitle = newTitle;
+        //});
     }
 );

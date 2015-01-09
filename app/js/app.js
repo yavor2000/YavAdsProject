@@ -2,8 +2,8 @@ var adsApp = angular.module('adsApp', [
   'ngRoute', 'ui.bootstrap', 'ngCookies', 'ngResource', 'angular-growl', 'ngAnimate'
 ]);
 
-adsApp.constant('baseServiceUrl', 'http://softuni-ads.azurewebsites.net');
-//adsApp.constant('baseServiceUrl', 'http://localhost:1337');
+//adsApp.constant('baseServiceUrl', 'http://softuni-ads.azurewebsites.net');
+adsApp.constant('baseServiceUrl', 'http://localhost:1337');
 
 adsApp.config(["growlProvider", "$httpProvider", function(growlProvider, $httpProvider) {
     growlProvider.globalTimeToLive(3000);
@@ -19,8 +19,8 @@ adsApp.config(['$routeProvider', function($routeProvider) {
           controller: 'HomeController'
       })
       .when('/home', {
-        templateUrl: 'templates/home.html',
-        controller: 'HomeController'
+          templateUrl: 'templates/home.html',
+          controller: 'HomeController'
       })
       .when('/home/page=:page', {
           templateUrl: 'templates/home.html',
@@ -36,5 +36,6 @@ adsApp.config(['$routeProvider', function($routeProvider) {
       })
       .otherwise({redirectTo: '/home'});
 }]);
+
 
 

@@ -2,7 +2,8 @@
  * Created by Yavor on 03.01.2015 г..
  */
 adsApp.controller('LoginController', function($scope, $rootScope, $location, authService, growl) {
-    //$rootScope.$broadcast('changeNavTitle', 'Ads - Login');
+    $rootScope.pageTitle = 'Login';
+
     $scope.login = function(userData) {
         authService.login(userData,
             function success() {

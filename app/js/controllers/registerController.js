@@ -1,18 +1,30 @@
 /**
  * Created by Yavor on 03.01.2015 г..
  */
-adsApp.controller('RegisterController', function($scope, $rootScope, $cookieStore, mainData) {
-    $rootScope.$broadcast('changeNavTitle', 'Ads - Register');
+adsApp.controller('RegisterController', function($scope, $rootScope, $cookieStore, $location,  authService, filterService, growl) {
+    $rootScope.pageTitle = 'Register';
 
-    $scope.login = function() {
-        console.log($scope.user);
-        mainData.login($scope.user, function (data, status, headers, config) {
-            console.log(status);
-            console.log(data);
-            $scope.userData = data;
-            $cookieStore.put('access_token', $scope.userData.access_token);
-            $cookieStore.put('username', $scope.userData.username);
-            $scope.username = $cookieStore.get('username');
-        });
+    $scope.validatePassword = function (userData) {
+        if (userData) {
+            return userData.password !== userData.confirmPassword;
+        }
+        return false;
+    };
+
+    $scope.userData = {townId: null};
+    $scope.towns = filterService.getTowns();
+
+    $scope.register = function(userData) {
+
+        authService.register(userData,
+            function success() {
+                growl.success("User registered successfully");
+                $location.path("/");
+            },
+            function error(err) {
+                var errorDescription = err.error_description || '';
+                growl.error('User registration failed</br>' + err.error_description);
+            }
+        );
     };
 });

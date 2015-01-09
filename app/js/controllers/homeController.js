@@ -2,7 +2,8 @@
  * Created by Yavor on 31.12.2014 г..
  */
 adsApp.controller('HomeController', function($scope, $rootScope, $location, $routeParams, adsService, filterService, authService, growl, $cookieStore) {
-    $rootScope.$broadcast('changeNavTitle', 'Ads - Home');
+    //$rootScope.$broadcast('changeNavTitle', 'Ads - Home');
+    $rootScope.pageTitle = authService.isLoggedIn() ? 'User Home' : 'Home';
 
     $scope.adsParams = $cookieStore.get('adsParams') || {
         startPage: 1,
@@ -78,11 +79,12 @@ adsApp.controller('HomeController', function($scope, $rootScope, $location, $rou
             function(resp) {
                 $scope.data = resp;
                 $scope.totalItems = $scope.data.numItems;
-                //$rootScope.$broadcast('isLoading', false);
                 if (resp.ads.length==0) {
                     growl.warning('No ads to display', {ttl: 1500});
+                } else if (resp.ads.length==1) {
+                    growl.info('There is only one ad', {ttl: 2500});
                 } else {
-                    growl.info('There are ' + resp.numItems + ' ad(s)', {ttl: 2500});
+                    growl.info('There are ' + resp.numItems + ' ads', {ttl: 2500});
                 }
             },
             function (error) {
