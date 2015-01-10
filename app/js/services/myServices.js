@@ -65,16 +65,54 @@ adsApp.factory('userAdsService', function ($resource, $rootScope, $log, $http, a
         $rootScope.$broadcast('isLoading', true);
         $http(request).success(function(data) {
             success(data);
-        }).error(function (data, status, headers, config) {
-            $log.warn(data);
-        })
+                }).error(function (data, status, headers, config) {
+                    $log.warn(data);
+                })
             .finally(function(){
                 $rootScope.$broadcast('isLoading', false);
             });
     }
 
+    function postNewAd(ad, success, error) {
+        var request = {
+            method: 'POST',
+            url: baseServiceUrl + '/api/user/ads',
+            headers: authService.getAuthHeaders(),
+            data: ad
+        };
+        $http(request)
+            .success(function (data, status, headers, config) {
+                console.log('Successfully added new ad. After submitted by an administrator it will be published.');
+                success();
+
+            })
+            .error(function (data, status, headers, config) {
+               console.log('Error publishing new ad!');
+                error();
+            })
+
+    }
+
+    function deactivateAd(id) {
+        var request = {
+            method: 'PUT',
+            headers: authService.getAuthHeaders(),
+            url: baseServiceUrl + '/api/user/ads/deactivate/' + id
+        };
+        $http(request)
+            .success(function (data, status, headers, config) {
+                $log.success('Ad successfully deactivated.');
+                window.location.reload();
+            })
+            .error(function (data, status, headers, config) {
+                $log.error('Could not deactivate your ad');
+            })
+    }
+
     return {
-        getUserAds: getMyAds
+        getUserAds: getMyAds,
+        deactivateAd: deactivateAd,
+        publishNewAd: postNewAd
     }
 
 });

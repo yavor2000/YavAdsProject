@@ -1,11 +1,12 @@
 /**
  * Created by Yavor on 09.01.2015 г..
  */
-adsApp.controller('UserAdsController', function ($scope, $cookieStore, $location, $rootScope, $routeParams, authService, userAdsService, growl) {
+adsApp.controller('UserAdsController',
+    function ($scope, $cookieStore, $location, $rootScope, $routeParams, authService, userAdsService, filterService, growl) {
         $rootScope.pageTitle = 'My Ads';
 
         $scope.navMenuId = $cookieStore.get('navMenuId') || 0;
-        $scope.statusMenuId = $cookieStore.get('statusMenuId') || undefined;
+        $scope.statusMenuId = $cookieStore.get('statusMenuId');
 
         $scope.navMenuClicked = function (id) {
             $scope.navMenuId = id;
@@ -13,9 +14,13 @@ adsApp.controller('UserAdsController', function ($scope, $cookieStore, $location
         };
 
         $scope.statusMenuClicked = function (id) {
-            $scope.statusMenuId = id;
-            $cookieStore.put('statusMenuId', id);
-            reloadAllAds();
+            if (id != $scope.statusMenuId) {
+                $scope.userAdsParams.startPage = 1;
+                $cookieStore.put('userAdsParams', $scope.userAdsParams);
+                $scope.statusMenuId = id;
+                $cookieStore.put('statusMenuId', id);
+                $location.path('/user/ads/page=1');
+            }
         };
 
         $scope.userAdsParams = $cookieStore.get('userAdsParams') || {
@@ -51,7 +56,41 @@ adsApp.controller('UserAdsController', function ($scope, $cookieStore, $location
             $scope.dataLoading = working;
         });
 
-        reloadAllAds();
+        filterService.getTowns(function(resp) {
+                $scope.towns = resp;
+            },
+            function(error){
+                growl.error(error.error_description, {ttl: 5000});
+            });
+        filterService.getCategories(function(resp) {
+                $scope.categories = resp;
+            },
+            function(error){
+                growl.error(error.error_description, {ttl: 5000});
+            });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('previewImg').setAttribute('src', e.target.result);
+                    $scope.newAd.imageDataUrl = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+                var filePath = document.getElementById('imgInp').value;
+                document.getElementById('showPath').setAttribute('value', filePath);
+            }
+        }
+        var imgLink = document.getElementById("imgInp");
+        if (imgLink) {
+            document.getElementById("imgInp").onchange = function () {
+                readURL(this);
+            };
+        }
+
+        if ($location.url().indexOf('publish') < 0) {
+            reloadAllAds();
+        }
 
         function reloadAllAds () {
             userAdsService.getUserAds(
@@ -73,5 +112,35 @@ adsApp.controller('UserAdsController', function ($scope, $cookieStore, $location
                 $scope.statusMenuId, $scope.userAdsParams.startPage, $scope.userAdsParams.pageSize);
         }
 
+        $scope.publishNewAd = function (adData) {
+            console.log(adData);
+
+            if (!adData || !adData.title || !adData.text) {
+                growl.error('Title and text are required!');
+                return;
+            }
+
+            userAdsService.publishNewAd(adData,
+                function () {
+                    growl.success('Ad successfully published.');
+                    $location.path('/user/ads');
+                },
+                function() {
+                    growl.error('Could not publish your ad');
+                    $location.path('/user/ads');
+                });
+        };
+
+        $scope.deactivateAd = function (id) {
+            userAdsService.deactivateAd(id)
+                //.$promise
+                .then(function () {
+                    growl.success('Ad successfully deactivated.');
+                    $location.path('/user/ads');
+                })
+                .catch(function() {
+                    growl.error('Could not deactivate your ad');
+                });
+        };
     }
 );

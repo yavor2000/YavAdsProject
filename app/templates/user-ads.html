@@ -82,8 +82,8 @@
                                             </div>
                                             <div class="col-md-9 _col-5-gutter">
                                                 <ul class="list-group">
-                                                    <li class="list-group-item list-group-item-success">{{ad.categoryName}}</li>
-                                                    <li class="list-group-item list-group-item-success">{{ad.townName}}</li>
+                                                    <li class="list-group-item list-group-item-success">{{ad.categoryName || 'none'}}</li>
+                                                    <li class="list-group-item list-group-item-success">{{ad.townName || 'none'}}</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -95,12 +95,14 @@
 
                         <div class="col-md-2 text-center">
                             <h4>Status:</h4>
-                            <div class="list-group-item">{{ad.status}}</div>
-                            <div ng-if="ad.status=='Published' || ad.status=='WaitingApproval'" class="btn btn-primary _marginTB">deactivate</div>
+                            <div class="list-group-item _row-5-gutter">{{ad.status}}</div>
+                            <div ng-if="ad.status=='Published' || ad.status=='WaitingApproval'"
+                                 class="btn btn-primary _marginTB _row-5-gutter"
+                                 ng-click="deactivateAd(ad.id)">deactivate</div>
                             <div ng-if="ad.status=='Inactive'">
-                                <div class="btn btn-primary _marginTB">Edit</div>
-                                <div class="btn btn-primary _marginTB">Publish again</div>
-                                <div class="btn btn-primary _marginTB">Delete</div>
+                                <div class="btn btn-primary _marginTB" ng-click="getSingleAd(ad.id)">Edit</div>
+                                <div class="btn btn-primary _marginTB" ng-click="publishAgain(ad.id)">Publish again</div>
+                                <div class="btn btn-primary _marginTB" ng-click="deleteAd(ad.id)">Delete</div>
                             </div>
                         </div>
                     </div>

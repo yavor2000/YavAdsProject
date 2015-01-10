@@ -42,6 +42,10 @@ adsApp.config(['$routeProvider', function($routeProvider) {
           templateUrl: 'templates/user-ads.html',
           controller: 'UserAdsController'
       })
+      .when('/user/ads/publish', {
+          templateUrl: 'templates/publishAd.html',
+          controller: 'UserAdsController'
+      })
       .otherwise({redirectTo: '/'});
 }]);
 

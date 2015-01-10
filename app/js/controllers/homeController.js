@@ -65,7 +65,7 @@ adsApp.controller('HomeController', function($scope, $rootScope, $location, $rou
             $scope.adsParams.categoryId = categorySelected;
             $scope.adsParams.startPage = 1;
             $cookieStore.put('adsParams', $scope.adsParams);
-            reloadAllAds();
+            //reloadAllAds();
             $location.path('/home/page='+$scope.adsParams.startPage);
         }
     };
@@ -75,7 +75,7 @@ adsApp.controller('HomeController', function($scope, $rootScope, $location, $rou
             $scope.adsParams.townId = townSelected;
             $scope.adsParams.startPage = 1;
             $cookieStore.put('adsParams', $scope.adsParams);
-            reloadAllAds();
+            //reloadAllAds();
             $location.path('/home/page='+$scope.adsParams.startPage);
         }
     };

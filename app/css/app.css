@@ -40,3 +40,39 @@ body {
   width: 100%;
   margin: 5px 0;
 }
+
+/*Browse image*/
+.btn-file {
+  position: relative;
+  left: 17px;
+  margin-top: -10px;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+#showPath {
+  display: inline-block;
+  background-color: white !important;
+  color: #000000;
+  cursor: text !important;
+  margin-left: 15px;
+  width: 82% !important;
+  height: 38px;
+}
+
+#previewImg {
+  height: 100%;
+  width: 100%;
+}

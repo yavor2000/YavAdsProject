@@ -1,0 +1,82 @@
+<div class="jumbotron">
+    <div class="row">
+        <!--Navigation == left side bar-->
+        <div class="col-md-2">
+            <div ng-include="'templates/partials/navigation-side-bar.html'"></div>
+        </div>
+
+        <!-- Publish new ad -->
+        <div class="col-md-10">
+            <div class="well bs-component">
+                <form class="form-horizontal" name="adForm" ng-submit="publishNewAd(newAd)">
+                    <fieldset id="deleteContainer">
+                        <legend>Publish New Ad</legend>
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-1">
+                                <div class="form-group">
+                                    <label for="inputTitle" class="col-lg-2 control-label">Title:</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" class="form-control" class="selectInEdit" id="inputTitle" placeholder="Title" required ng-model="newAd.title" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="textArea" class="col-lg-2 control-label">Text:</label>
+                                    <div class="col-lg-10">
+                                        <textarea class="form-control" rows="6" class="textArea" id="textArea" required ng-model="newAd.text" >{{newAd.text}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="image-container">
+                                    <img id="previewImg" src="" alt="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="imgInp" class="col-lg-2 control-label">Image:</label>
+                                    <div class="col-lg-10">
+                                        <div class="row">
+                                    <span class="input-group-btn">
+                                        <span class="btn btn-primary btn-file" id="inputImage">Browse&hellip;<input type='file' id="imgInp" /></span>
+                                        <input type="text" id="showPath" class="form-control" readonly/>
+                                    </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="category" class="col-lg-2 control-label">Category:</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" class="selectInEdit" id="category" ng-model="newAd.categoryId">
+                                            <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="town" class="col-lg-2 control-label">Town:</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" id="town" ng-model="newAd.townId">
+                                            <option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-10 col-lg-offset-2">
+                                        <button class="btn btn-default"><a href="#/user">Cancel</a></button>
+                                        <button type="submit" class="btn btn-primary" ng-disabled="adForm.$invalid">Publish</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
