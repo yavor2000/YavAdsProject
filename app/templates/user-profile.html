@@ -68,7 +68,45 @@
                     </div>
                     <!-- change password -->
                     <div class="col-md-6">
+                        <form class="form-horizontal" name="passForm" ng-submit="changePassword(passwordData)">
+                            <fieldset id="changePasswordContainer">
+                                <legend>Change Password</legend>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="oldpass" class="col-lg-4 control-label">Old password</label>
+                                        <div class="col-lg-6">
+                                            <input type="password" class="form-control" id="oldpass" autocomplete="off"
+                                                   ng-model="passwordData.oldPassword" required="" ng-minlength="3">
+                                            <span class="error" ng-show="passForm.passwordData.oldPassword.$error.required">Required! Min 3 characters</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newpass" class="col-lg-4 control-label">New password</label>
+                                        <div class="col-lg-6">
+                                            <input type="password" class="form-control" id="newpass" autocomplete="off"
+                                                   ng-model="passwordData.newPassword" required="" ng-minlength="3">
+                                            <span class="error" ng-show="passForm.passwordData.newPassword.$error.required">Required!</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirmPass" class="col-lg-4 control-label">Confirm New Password</label>
+                                        <div class="col-lg-6">
+                                            <input type="password" class="form-control" id="confirmPass" autocomplete="off"
+                                                   ng-model="passwordData.confirmPassword" required="" ng-minlength="3">
+                                            <span class="error" ng-show="passForm.confirmPassword.$error.required">Required! Min 3 characters</span>
+                                            <span class="error" ng-show="!validatePassword(passwordData)">Passwords are not the same!</span>
+                                        </div>
+                                    </div>
 
+                                    <div class="form-group">
+                                        <div class="col-lg-7 col-lg-offset-3">
+                                            <a href="#/home"><button class="btn btn-default">Cancel</button></a>
+                                            <button type="submit" class="btn btn-primary"><!--ng-disabled="registerForm.$invalid"-->Change Password</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
 

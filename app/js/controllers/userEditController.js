@@ -51,6 +51,21 @@ adsApp.controller('UserEditController',
             );
         };
 
-
+        $scope.changePassword = function(passwordData) {
+            if (this.validatePassword(passwordData)) {
+                authService.changePassword(passwordData,
+                    function success() {
+                        growl.success("User password changed successfully");
+                        $location.path("/home");
+                    },
+                    function error(err) {
+                        var errorDescription = err.error_description || '';
+                        growl.error('Change user password failed</br>' + err.message);
+                    }
+                );
+            } else {
+                growl.error('Confirm new password!');
+            }
+        };
     }
 );
