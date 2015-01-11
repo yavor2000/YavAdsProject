@@ -11,6 +11,7 @@ adsApp.controller('RegisterController', function($scope, $rootScope, $cookieStor
         return false;
     };
 
+    $scope.nullValue = null;
     $scope.userData = {townId: null};
     $scope.towns = filterService.getTowns();
 

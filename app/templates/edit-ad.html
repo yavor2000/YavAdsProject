@@ -68,7 +68,7 @@
                                     <label for="town" class="col-lg-2 control-label">Town:</label>
                                     <div class="col-lg-10">
                                         <select class="form-control" id="town" ng-init="original.townId" ng-model="editAd.townId">
-                                            <option value="{{nullValue}}" ng-selected="!original.tawonId">none</option>
+                                            <option value="{{nullValue}}" ng-selected="!original.townId">none</option>
                                             <option ng-repeat="town in towns"
                                                     value="{{town.id}}"
                                                     ng-selected="original.townId==town.id">{{town.name}}</option>

@@ -1,0 +1,78 @@
+<div class="jumbotron">
+    <div class="row">
+        <!--Navigation == left side bar-->
+        <div class="col-md-2">
+            <div ng-include="'templates/partials/navigation-side-bar.html'"></div>
+        </div>
+
+
+        <div class="col-md-10">
+            <div class="well bs-component">
+                <!--loading warning-->
+                <div ng-if="dataLoading" class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Loading user data...</h3>
+                    </div>
+                    <div class="text-center"><img src="images/ajax-loader.gif" alt="loading..."/></div>
+                </div>
+                <!-- Profile screen -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <form class="form-horizontal" name="profileForm" ng-submit="updateProfile(userData)">
+                            <fieldset id="editProfileContainer">
+                                <legend>Edit Profile</legend>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="editName" class="col-lg-3 control-label">Name</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" id="editName" autocomplete="off"
+                                                   ng-model="userData.name" required="" ng-minlength="3">
+                                            <span class="error" ng-show="profileForm.userData.username.$error.required">Required! Min 3 characters</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editEmail" class="col-lg-3 control-label">Email</label>
+                                        <div class="col-lg-7">
+                                            <input type="email" class="form-control" id="editEmail" autocomplete="off"
+                                                   ng-model="userData.email" required="" ng-minlength="3">
+                                            <span class="error" ng-show="profileForm.userData.email.$error.required">Required!</span>
+                                            <span class="error" ng-show="profileForm.userData.email.$error.email">Not valid email!</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPhone" class="col-lg-3 control-label">Phone</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" id="editPhone" autocomplete="off"
+                                                   ng-model="userData.phoneNumber" required="" ng-minlength="3">
+                                            <span class="error" ng-show="profileForm.userData.phoneNumber.$error.required">Required! Min 3 characters</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editTown" class="col-lg-3 control-label">Town</label>
+                                        <div class="col-lg-7">
+                                            <select id="editTown" class="form-control" ng-init="userData.townId" ng-model="userData.townId">
+                                                <option value="{{nullValue}}" ng-selected="!userData.townId">(None)</option>
+                                                <option ng-repeat="town in towns" value="{{town.id}}" ng-selected="userData.townId = town.Id">{{town.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-7 col-lg-offset-3">
+                                            <a href="#/home"><button class="btn btn-default">Cancel</button></a>
+                                            <button type="submit" class="btn btn-primary"><!--ng-disabled="registerForm.$invalid"-->Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!-- change password -->
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

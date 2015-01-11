@@ -50,6 +50,10 @@ adsApp.config(['$routeProvider', function($routeProvider) {
           templateUrl: 'templates/edit-ad.html',
           controller: 'EditAdController'
       })
+      .when('/user/profile', {
+          templateUrl: 'templates/user-profile.html',
+          controller: 'UserEditController'
+      })
       .otherwise({redirectTo: '/'});
 }]);
 

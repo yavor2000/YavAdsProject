@@ -2,7 +2,7 @@
  * Created by Yavor on 08.01.2015 г..
  */
 adsApp.factory('authService',
-    function ($http, $cookieStore, baseServiceUrl) {
+    function ($http, $cookieStore, $rootScope, baseServiceUrl) {
         function clearNavData() {
             $cookieStore.remove('adsParams');
             $cookieStore.remove('navMenuId');
@@ -21,7 +21,10 @@ adsApp.factory('authService',
                     console.log(sessionStorage['currentUser']);
                     success(data);
                     clearNavData();
-                }).error(error);
+                }).error(function (er) {
+                    console.log('error logging-in');
+                    error(er);
+                });
             },
 
             register: function(userData, success, error) {
@@ -47,6 +50,57 @@ adsApp.factory('authService',
                 if (userObject) {
                     return JSON.parse(sessionStorage['currentUser']);
                 }
+            },
+
+            getUserData : function(success, error) {
+                $rootScope.$broadcast('isLoading', true);
+                var request = {
+                    method: 'GET',
+                    headers: this.getAuthHeaders(),
+                    url: baseServiceUrl + '/api/user/profile'
+                };
+                $http(request).success(function(data) {
+                    //sessionStorage['currentUser'] = JSON.stringify(data);
+                    success(data);
+                }).error(function (er) {
+                    error(er);
+                }).finally(function () {
+                    $rootScope.$broadcast('isLoading', false);
+                });
+            },
+
+            updateUserData : function(userData, success, error) {
+                $rootScope.$broadcast('isLoading', true);
+                var request = {
+                    method: 'PUT',
+                    headers: this.getAuthHeaders(),
+                    url: baseServiceUrl + '/api/user/profile',
+                    data: userData
+                };
+                $http(request).success(function(data) {
+                    success(data);
+                }).error(function (er) {
+                    error(er);
+                }).finally(function () {
+                    $rootScope.$broadcast('isLoading', false);
+                });
+            },
+
+            changePassword : function(passData, success, error) {
+                $rootScope.$broadcast('isLoading', true);
+                var request = {
+                    method: 'PUT',
+                    headers: this.getAuthHeaders(),
+                    url: baseServiceUrl + '/api/user/changepassword',
+                    data: passData
+                };
+                $http(request).success(function(data) {
+                    success(data);
+                }).error(function (er) {
+                    error(er);
+                }).finally(function () {
+                    $rootScope.$broadcast('isLoading', false);
+                });
             },
 
             isAnonymous : function() {

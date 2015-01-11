@@ -55,8 +55,8 @@
             <div class="form-group">
                 <label for="town" class="col-lg-2 control-label">Town</label>
                 <div class="col-lg-10">
-                    <select id="town" class="form-control" ng-model="user.townId">
-                        <option value="undefined" selected="selected">(None)</option>
+                    <select id="town" class="form-control" ng-init="nullValue" ng-model="user.townId">
+                        <option value="{{nullValue}}" ng-selected="true">(None)</option>
                         <option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
                     </select>
                 </div>
