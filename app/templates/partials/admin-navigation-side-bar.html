@@ -1,0 +1,30 @@
+<!-- Navigation box for logged in admin users -->
+<div ng-if="authService.isAdmin()" class="box">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Navigation</h3>
+        </div>
+        <ul class="listNoStyle">
+            <li><a class="list-group-item" ng-click="adminNavMenuClicked(0)" ng-class="{'active' : adminNavMenuId == 0}"href="#/">Ads</a></li>
+            <li><a class="list-group-item" ng-click="adminNavMenuClicked(1)" ng-class="{'active' : adminNavMenuId == 1}"href="#/user/ads">Users</a></li>
+            <li><a class="list-group-item" ng-click="adminNavMenuClicked(2)" ng-class="{'active' : adminNavMenuId == 2}"href="#/user/ads/publish">Categories</a></li>
+            <li><a class="list-group-item" ng-click="adminNavMenuClicked(3)" ng-class="{'active' : adminNavMenuId == 3}"href="#/user/profile">Towns</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Navigation box for logged in admins -->
+<div ng-if="authService.isAdmin()" class="box">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Administrator</h3>
+        </div>
+        <ul class="listNoStyle">
+            <li class="list-group-item"><a href="#/admin/ads">Ads</a></li>
+            <li class="list-group-item"><a href="#/admin/users">Users</a></li>
+            <li class="list-group-item"><a href="#/admin/categories">Categories</a></li>
+            <li class="list-group-item"><a href="#/admin/towns">Towns</a></li>
+            <li class="list-group-item"><a ng-click="logout()">Logout</a></li>
+        </ul>
+    </div>
+</div>

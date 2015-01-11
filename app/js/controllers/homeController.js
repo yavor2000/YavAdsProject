@@ -23,7 +23,7 @@ adsApp.controller('HomeController', function($scope, $rootScope, $location, $rou
         $location.path('/home/page='+pageNo);
     };
 
-    $scope.totalItems = 99999999; // will be updated on ads load but of not set will cause setPage to 1
+    //$scope.totalItems = 99999999; // will be updated on ads load but of not set will cause setPage to 1
 
     if ($routeParams.page && $routeParams.page>0 ) {
         $scope.adsParams.startPage = $routeParams.page;

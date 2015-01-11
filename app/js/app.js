@@ -14,14 +14,14 @@ adsApp.config(["growlProvider", "$httpProvider", function(growlProvider) {
 adsApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
       .when('/', {
+          redirectTo: '/home'
+      })
+      .when('/home', {
           templateUrl: 'templates/home.html',
           controller: 'HomeController'
       })
-      .when('/home', {
-          redirectTo: '/'
-      })
       .when('/home/page=:page', {
-          redirectTo: '/'
+          redirectTo: '/home'
       })
       .when('/register', {
           templateUrl: 'templates/register.html',
@@ -54,7 +54,15 @@ adsApp.config(['$routeProvider', function($routeProvider) {
           templateUrl: 'templates/user-profile.html',
           controller: 'UserEditController'
       })
-      .otherwise({redirectTo: '/'});
+      .when('/admin/home', {
+          templateUrl: 'templates/admin-home.html',
+          controller: 'AdminHomeController'
+      })
+      .when('/admin/home/page=:page', {
+          templateUrl: 'templates/admin-home.html',
+          controller: 'AdminHomeController'
+      })
+      .otherwise({redirectTo: '/home'});
 }]);
 
 
