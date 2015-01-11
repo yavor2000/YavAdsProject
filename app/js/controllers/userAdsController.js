@@ -2,7 +2,7 @@
  * Created by Yavor on 09.01.2015 г..
  */
 adsApp.controller('UserAdsController',
-    function ($scope, $cookieStore, $location, $rootScope, $routeParams, authService, userAdsService, filterService, growl) {
+    function ($scope, $cookieStore, $location, $route, $rootScope, $routeParams, authService, userAdsService, filterService, growl) {
         $rootScope.pageTitle = 'My Ads';
 
         $scope.navMenuId = $cookieStore.get('navMenuId') || 0;
@@ -132,15 +132,42 @@ adsApp.controller('UserAdsController',
         };
 
         $scope.deactivateAd = function (id) {
-            userAdsService.deactivateAd(id)
-                //.$promise
-                .then(function () {
-                    growl.success('Ad successfully deactivated.');
-                    $location.path('/user/ads');
-                })
-                .catch(function() {
-                    growl.error('Could not deactivate your ad');
+            userAdsService.deactivateAd(id,
+                function() {
+                    growl.success('Ad successfully deactivated.', {ttl: 3500});
+                    $route.reload();
+                },
+                function() {
+                    growl.error('Could not deactivate your ad', {ttl:3500});
                 });
+        };
+
+        $scope.publishAgainAd = function (id) {
+            userAdsService.publishAgainAd(id,
+                function() {
+                    growl.success('Ad published again successfully.', {ttl: 3500});
+                    $route.reload();
+                },
+                function() {
+                    growl.error('Could not republish your ad', {ttl:3500});
+                });
+        };
+
+        $scope.deleteAd = function (id) {
+            if (id && !isNaN(id)) {
+                $location.path('/user/ads/delete=:'+id);
+
+                //userAdsService.deleteAd(id,
+                //    function() {
+                //        growl.success('Ad deleted successfully.', {ttl: 3500});
+                //        $route.reload();
+                //    },
+                //    function() {
+                //        growl.error('Could not delete your ad', {ttl:3500});
+                //    });
+            }
+
+
         };
     }
 );

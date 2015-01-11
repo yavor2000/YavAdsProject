@@ -93,7 +93,7 @@ adsApp.factory('userAdsService', function ($resource, $rootScope, $log, $http, a
 
     }
 
-    function deactivateAd(id) {
+    function deactivateAd(id, success, error) {
         var request = {
             method: 'PUT',
             headers: authService.getAuthHeaders(),
@@ -101,18 +101,86 @@ adsApp.factory('userAdsService', function ($resource, $rootScope, $log, $http, a
         };
         $http(request)
             .success(function (data, status, headers, config) {
-                $log.success('Ad successfully deactivated.');
-                window.location.reload();
+                console.log('Ad successfully deactivated.');
+                success();
             })
             .error(function (data, status, headers, config) {
-                $log.error('Could not deactivate your ad');
+                console.log('Could not deactivate your ad');
+                error();
+            })
+    }
+
+    function publishAgainAd(id, success, error) {
+        var request = {
+            method: 'PUT',
+            headers: authService.getAuthHeaders(),
+            url: baseServiceUrl + '/api/user/ads/publishagain/' + id
+        };
+        $http(request)
+            .success(function (data, status, headers, config) {
+                console.log('Ad successfully deactivated.');
+                success();
+            })
+            .error(function (data, status, headers, config) {
+                console.log('Could not deactivate your ad');
+                error();
+            })
+    }
+
+    function getAdById(id, success, error) {
+        var request = {
+            method: 'GET',
+            headers: authService.getAuthHeaders(),
+            url: baseServiceUrl + '/api/user/ads/' + id
+        };
+        $http(request)
+            .success(function (data, status, headers, config) {
+                console.log('Ad successfully deleted.');
+                success();
+            })
+            .error(function (data, status, headers, config) {
+                console.log('Could not delete your ad.');
+                error();
+            })
+    }
+
+    function deleteAd(id, success, error) {
+        var request = {
+            method: 'GET',
+            headers: authService.getAuthHeaders(),
+            url: baseServiceUrl + '/api/user/ads/' + id
+        };
+        $http(request)
+            .success(function(data) {
+                success(data);
+            })
+            .error(function (data, status, headers, config) {
+                error();
+            });
+
+        var request = {
+            method: 'DELETE',
+            headers: authService.getAuthHeaders(),
+            url: baseServiceUrl + '/api/user/ads/' + id
+        };
+        $http(request)
+            .success(function (data, status, headers, config) {
+                console.log('Ad successfully deleted.');
+                success();
+            })
+            .error(function (data, status, headers, config) {
+                console.log('Could not delete your ad.');
+                error();
             })
     }
 
     return {
         getUserAds: getMyAds,
         deactivateAd: deactivateAd,
-        publishNewAd: postNewAd
+        publishNewAd: postNewAd,
+        publishAgainAd: publishAgainAd,
+        deleteAd: deleteAd,
+        getAdById: getAdById
     }
 
 });

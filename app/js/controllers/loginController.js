@@ -8,7 +8,6 @@ adsApp.controller('LoginController', function($scope, $rootScope, $cookieStore, 
         authService.login(userData,
             function success() {
                 growl.success("User <strong>" + (userData.username).toUpperCase() + "</strong> logged-in successfully :)");
-
                 $location.path("/");
             },
             function error(err) {
@@ -17,17 +16,4 @@ adsApp.controller('LoginController', function($scope, $rootScope, $cookieStore, 
             }
         );
     };
-    /*$scope.login = function() {
-        console.log($scope.user);
-        mainData.login($scope.user,
-            function (data, status, headers, config) {
-                $scope.userData = data;
-                $cookieStore.put('access_token', $scope.userData.access_token);
-                $cookieStore.put('username', $scope.userData.username);
-                $scope.username = $cookieStore.get('username');
-            },
-            function (error) {
-
-            });
-    };*/
 });

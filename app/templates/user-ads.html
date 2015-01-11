@@ -94,6 +94,7 @@
                         </div>
 
                         <div class="col-md-2 text-center">
+                            <small>Id:{{ad.id}}</small>
                             <h4>Status:</h4>
                             <div class="list-group-item _row-5-gutter">{{ad.status}}</div>
                             <div ng-if="ad.status=='Published' || ad.status=='WaitingApproval'"
@@ -101,7 +102,7 @@
                                  ng-click="deactivateAd(ad.id)">deactivate</div>
                             <div ng-if="ad.status=='Inactive'">
                                 <div class="btn btn-primary _marginTB" ng-click="getSingleAd(ad.id)">Edit</div>
-                                <div class="btn btn-primary _marginTB" ng-click="publishAgain(ad.id)">Publish again</div>
+                                <div class="btn btn-primary _marginTB" ng-click="publishAgainAd(ad.id)">Publish again</div>
                                 <div class="btn btn-primary _marginTB" ng-click="deleteAd(ad.id)">Delete</div>
                             </div>
                         </div>

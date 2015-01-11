@@ -18,6 +18,7 @@ adsApp.factory('authService',
                 };
                 $http(request).success(function(data) {
                     sessionStorage['currentUser'] = JSON.stringify(data);
+                    console.log(sessionStorage['currentUser']);
                     success(data);
                     clearNavData();
                 }).error(error);

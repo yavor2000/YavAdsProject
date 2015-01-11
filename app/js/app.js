@@ -43,8 +43,12 @@ adsApp.config(['$routeProvider', function($routeProvider) {
           controller: 'UserAdsController'
       })
       .when('/user/ads/publish', {
-          templateUrl: 'templates/publishAd.html',
+          templateUrl: 'templates/publish-ad.html',
           controller: 'UserAdsController'
+      })
+      .when('/user/ads/delete=:id', {
+          templateUrl: 'templates/delete-ad.html',
+          controller: 'DeleteAdController'
       })
       .otherwise({redirectTo: '/'});
 }]);
