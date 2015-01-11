@@ -13,7 +13,10 @@ adsApp.factory('adsService', function ($rootScope, $resource, baseServiceUrl) {
                 }
             );
             return adsResource.getAll(params, success, error)
-                .$promise.finally(function() {
+                .$promise
+                //.then(success)
+                //.catch(error)
+                .finally(function() {
                     $rootScope.$broadcast('isLoading', false);
                 });
         }
@@ -90,7 +93,6 @@ adsApp.factory('userAdsService', function ($resource, $rootScope, $log, $http, a
                console.log('Error publishing new ad!');
                 error();
             })
-
     }
 
     function deactivateAd(id, success, error) {
@@ -160,13 +162,33 @@ adsApp.factory('userAdsService', function ($resource, $rootScope, $log, $http, a
             })
     }
 
+    function editAd(adId, editAd, success, error) {
+        var request = {
+            method: 'PUT',
+            url: baseServiceUrl + '/api/user/ads/' + adId,
+            headers: authService.getAuthHeaders(),
+            data: editAd
+        };
+        $http(request)
+            .success(function (data, status, headers, config) {
+                console.log('Successfully edited your ad.');
+                success();
+
+            })
+            .error(function (data, status, headers, config) {
+                console.log('Error editing your ad!');
+                error();
+            })
+    }
+
     return {
         getUserAds: getMyAds,
         deactivateAd: deactivateAd,
         publishNewAd: postNewAd,
         publishAgainAd: publishAgainAd,
         deleteAd: deleteAd,
-        getAdById: getAdById
+        getAdById: getAdById,
+        editAd: editAd
     }
 
 });

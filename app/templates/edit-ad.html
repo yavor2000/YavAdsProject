@@ -5,32 +5,34 @@
             <div ng-include="'templates/partials/navigation-side-bar.html'"></div>
         </div>
 
-        <!-- Publish new ad -->
+        <!-- Edit ad -->
         <div class="col-md-10">
             <div class="well bs-component">
-                <form class="form-horizontal" name="adForm" ng-submit="publishNewAd(newAd)">
-                    <fieldset id="deleteContainer">
-                        <legend>Publish New Ad</legend>
+                <form class="form-horizontal" name="editAdForm" ng-submit="submitEditAd(editAd)">
+                    <fieldset id="editContainer">
+                        <legend>Edit Ad</legend>
                         <div class="row">
                             <div class="col-md-6 col-md-offset-1">
                                 <div class="form-group">
                                     <label for="inputTitle" class="col-lg-2 control-label">Title:</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" class="selectInEdit" id="inputTitle" placeholder="Title" required ng-model="newAd.title" >
+                                        <input type="text" class="form-control" class="selectInEdit" id="inputTitle"
+                                               placeholder="{{original.title}}" required ng-model="editAd.title" >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="textArea" class="col-lg-2 control-label">Text:</label>
                                     <div class="col-lg-10">
                                         <textarea class="form-control" rows="6" class="textArea" id="textArea"
-                                                  placeholder="Describe your ad here..." required ng-model="newAd.text" >{{newAd.text}}</textarea>
+                                                  placeholder="{{original.text}}" required ng-model="editAd.text" >{{editAd.text}}</textarea>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="image-container">
-                                    <img id="previewImg" src="" alt="" />
+                                    <img id="previewEditImg" ng-src="{{original.imageDataUrl}}" alt="no image" />
+                                    <!--<img id="previewImg" ng-if="original.imageDataUrl!=null" ng-src="{{original.imageDataUrl}}" alt="no image" />-->
                                 </div>
                             </div>
                         </div>
@@ -38,12 +40,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="imgInp" class="col-lg-2 control-label">Image:</label>
+                                    <label for="imgEditInp" class="col-lg-2 control-label">Image:</label>
                                     <div class="col-lg-10">
                                         <div class="row">
                                     <span class="input-group-btn">
-                                        <span class="btn btn-primary btn-file" id="inputImage">Browse&hellip;<input type='file' id="imgInp" /></span>
-                                        <input type="text" id="showPath" class="form-control" readonly/>
+                                        <span class="btn btn-primary btn-file" id="inputEditImage">Browse&hellip;<input type='file' id="imgEditInp" /></span>
+                                        <input type="text" id="showEditPath" class="form-control" readonly/>
                                     </span>
                                         </div>
 
@@ -53,8 +55,11 @@
                                 <div class="form-group">
                                     <label for="category" class="col-lg-2 control-label">Category:</label>
                                     <div class="col-lg-10">
-                                        <select class="form-control" class="selectInEdit" id="category" ng-model="newAd.categoryId">
-                                            <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+                                        <select class="form-control" id="category" ng-init="original.townId" ng-model="editAd.categoryId">
+                                            <option value="{{nullValue}}" ng-selected="!original.categoryId">none</option>
+                                            <option ng-repeat="category in categories"
+                                                    value="{{category.id}}"
+                                                    ng-selected="original.categoryId==category.id">{{category.name}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -62,19 +67,22 @@
                                 <div class="form-group">
                                     <label for="town" class="col-lg-2 control-label">Town:</label>
                                     <div class="col-lg-10">
-                                        <select class="form-control" id="town" ng-model="newAd.townId">
-                                            <option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+                                        <select class="form-control" id="town" ng-init="original.townId" ng-model="editAd.townId">
+                                            <option value="{{nullValue}}" ng-selected="!original.tawonId">none</option>
+                                            <option ng-repeat="town in towns"
+                                                    value="{{town.id}}"
+                                                    ng-selected="original.townId==town.id">{{town.name}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
-                                        <a href="#/user"><button class="btn btn-default">Cancel</button></a>
-                                        <button type="submit" class="btn btn-primary" ng-disabled="adForm.$invalid">Publish</button>
+                                        <a href="#/user/ads"><button class="btn btn-default">Cancel</button></a>
+                                        <button type="submit" class="btn btn-primary" ng-disabled="editAdForm.$invalid">Apply</button>
                                     </div>
                                 </div>
                             </div>
-                            </div>
+                        </div>
                     </fieldset>
                 </form>
             </div>

@@ -35,15 +35,14 @@
                     <!--pagination-->
                     <div class="text-center">
                         <pagination class="pagination-sm"
-                                    total-items="totalItems"
+                                    total-items="data.numItems"
                                     items-per-page="adsParams.pageSize"
-                                    max-size="5"
+                                    max-size="4"
                                     page="adsParams.startPage"
                                     ng-model="adsParams.startPage"
                                     boundary-links="true"
                                     rotate="true"
                                     ng-change="pageChanged()"></pagination>
-                        <!--<div class="alert alert-dismissable alert-info">Page: {{currentPage}} / {{data.numPages}}</div>-->
                     </div>
                 </div>
             </div>
@@ -65,7 +64,6 @@
                                 <div class="image-container">
                                     <img ng-if="ad.imageDataUrl!=null" src="" ng-src="{{ad.imageDataUrl}}" class="_fullImgSize"/>
                                     <img ng-if="ad.imageDataUrl==null" src="images/NoImageSoftUni.jpg" alt="no image" class="_fullImgSize"/>
-                                    <!--<div ng-if="ad.imageDataUrl==null" class="list-group-item list-group-item-warning">No image!</div>-->
                                 </div>
                             </div>
                             <div class="col-md-7">

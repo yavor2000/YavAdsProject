@@ -81,6 +81,7 @@ adsApp.controller('UserAdsController',
                 document.getElementById('showPath').setAttribute('value', filePath);
             }
         }
+
         var imgLink = document.getElementById("imgInp");
         if (imgLink) {
             document.getElementById("imgInp").onchange = function () {
@@ -157,8 +158,12 @@ adsApp.controller('UserAdsController',
             if (id && !isNaN(id)) {
                 $location.path('/user/ads/delete='+id);
             }
+        };
 
-
+        $scope.openEditAd = function (id) {
+            if (id && !isNaN(id)) {
+                $location.path('/user/ads/edit='+id);
+            }
         };
     }
 );

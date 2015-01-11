@@ -23,13 +23,6 @@ adsApp.config(['$routeProvider', function($routeProvider) {
       .when('/home/page=:page', {
           redirectTo: '/'
       })
-      .when('/user/ads', {
-          templateUrl: 'templates/user-ads.html',
-          controller: 'UserAdsController'
-      })
-      .when('/user/ads/page=:page', {
-          redirectTo: '/user/ads'
-      })
       .when('/register', {
           templateUrl: 'templates/register.html',
           controller: 'RegisterController'
@@ -42,6 +35,9 @@ adsApp.config(['$routeProvider', function($routeProvider) {
           templateUrl: 'templates/user-ads.html',
           controller: 'UserAdsController'
       })
+      .when('/user/ads/page=:page', {
+          redirectTo: '/user/ads'
+      })
       .when('/user/ads/publish', {
           templateUrl: 'templates/publish-ad.html',
           controller: 'UserAdsController'
@@ -49,6 +45,10 @@ adsApp.config(['$routeProvider', function($routeProvider) {
       .when('/user/ads/delete=:id', {
           templateUrl: 'templates/delete-ad.html',
           controller: 'DeleteAdController'
+      })
+      .when('/user/ads/edit=:id', {
+          templateUrl: 'templates/edit-ad.html',
+          controller: 'EditAdController'
       })
       .otherwise({redirectTo: '/'});
 }]);

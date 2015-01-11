@@ -98,11 +98,4 @@ adsApp.controller('HomeController', function($scope, $rootScope, $location, $rou
                 growl.error(error.error_description, {ttl: 5000});
             });
     }
-
-    /*$scope.$watch('adsParams', function (newVal, oldVal, scope) {
-        if(newVal) {
-            $cookieStore.put('adsParams', scope.adsParams);
-            console.log('adsParam changed!');
-        }
-    });*/
 });

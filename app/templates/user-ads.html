@@ -36,9 +36,9 @@
                     <!--pagination-->
                     <div class="text-center">
                         <pagination class="pagination-sm"
-                                    total-items="totalItems"
+                                    total-items="data.numItems"
                                     items-per-page="userAdsParams.pageSize"
-                                    max-size="5"
+                                    max-size="4"
                                     page="userAdsParams.startPage"
                                     ng-model="userAdsParams.startPage"
                                     boundary-links="true"
@@ -101,7 +101,7 @@
                                  class="btn btn-primary _marginTB _row-5-gutter"
                                  ng-click="deactivateAd(ad.id)">deactivate</div>
                             <div ng-if="ad.status=='Inactive'">
-                                <div class="btn btn-primary _marginTB" ng-click="getSingleAd(ad.id)">Edit</div>
+                                <div class="btn btn-primary _marginTB" ng-click="openEditAd(ad.id)">Edit</div>
                                 <div class="btn btn-primary _marginTB" ng-click="publishAgainAd(ad.id)">Publish again</div>
                                 <div class="btn btn-primary _marginTB" ng-click="deleteAd(ad.id)">Delete</div>
                             </div>
