@@ -135,29 +135,15 @@ adsApp.factory('userAdsService', function ($resource, $rootScope, $log, $http, a
         };
         $http(request)
             .success(function (data, status, headers, config) {
-                console.log('Ad successfully deleted.');
-                success();
+                success(data);
             })
             .error(function (data, status, headers, config) {
-                console.log('Could not delete your ad.');
+                console.log('Could not get your ad.');
                 error();
             })
     }
 
     function deleteAd(id, success, error) {
-        var request = {
-            method: 'GET',
-            headers: authService.getAuthHeaders(),
-            url: baseServiceUrl + '/api/user/ads/' + id
-        };
-        $http(request)
-            .success(function(data) {
-                success(data);
-            })
-            .error(function (data, status, headers, config) {
-                error();
-            });
-
         var request = {
             method: 'DELETE',
             headers: authService.getAuthHeaders(),

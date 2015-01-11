@@ -17,8 +17,8 @@ adsApp.controller('DeleteAdController',
             }
         );
 
-        $scope.confirmDeleteAd = function (id) {
-            userAdsService.deleteAd(id,
+        $scope.confirmDeleteAd = function () {
+            userAdsService.deleteAd($routeParams.id,
                 function() {
                     growl.success('Ad deleted successfully.', {ttl: 3500});
                     $location.path('/user/ads');

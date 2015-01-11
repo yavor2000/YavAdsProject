@@ -155,16 +155,7 @@ adsApp.controller('UserAdsController',
 
         $scope.deleteAd = function (id) {
             if (id && !isNaN(id)) {
-                $location.path('/user/ads/delete=:'+id);
-
-                //userAdsService.deleteAd(id,
-                //    function() {
-                //        growl.success('Ad deleted successfully.', {ttl: 3500});
-                //        $route.reload();
-                //    },
-                //    function() {
-                //        growl.error('Could not delete your ad', {ttl:3500});
-                //    });
+                $location.path('/user/ads/delete='+id);
             }
 
 
