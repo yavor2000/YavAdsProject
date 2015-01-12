@@ -1,46 +1,6 @@
 /**
- * Created by Yavor on 31.12.2014 г..
+ * Created by Yavor on 11.01.2015 г..
  */
-adsApp.factory('adsService', function ($rootScope, $resource, baseServiceUrl) {
-    return {
-        getAllAds: function (params, success, error) {
-            $rootScope.$broadcast('isLoading', true);
-            var adsResource = $resource(
-                baseServiceUrl + '/api/ads',
-                null,
-                {
-                    'getAll': {method: 'GET'}
-                }
-            );
-            return adsResource.getAll(params, success, error)
-                .$promise
-                //.then(success)
-                //.catch(error)
-                .finally(function() {
-                    $rootScope.$broadcast('isLoading', false);
-                });
-        }
-    }
-});
-
-adsApp.factory('filterService', function ($resource, baseServiceUrl) {
-    var categoriesResource = $resource(
-        baseServiceUrl + '/api/categories'
-    );
-    var townsResource = $resource(
-        baseServiceUrl + '/api/towns'
-    );
-
-    return {
-        getCategories: function (success, error) {
-            return categoriesResource.query(success, error);
-        },
-        getTowns: function(success, error) {
-            return townsResource.query(success, error);
-        }
-    }
-});
-
 adsApp.factory('userAdsService', function ($resource, $rootScope, $log, $http, authService, baseServiceUrl) {
 
     function getMyAds(success, error, adStatus, startPage, pageSize ) {
@@ -68,9 +28,9 @@ adsApp.factory('userAdsService', function ($resource, $rootScope, $log, $http, a
         $rootScope.$broadcast('isLoading', true);
         $http(request).success(function(data) {
             success(data);
-                }).error(function (data, status, headers, config) {
-                    $log.warn(data);
-                })
+        }).error(function (data, status, headers, config) {
+            $log.warn(data);
+        })
             .finally(function(){
                 $rootScope.$broadcast('isLoading', false);
             });
@@ -90,7 +50,7 @@ adsApp.factory('userAdsService', function ($resource, $rootScope, $log, $http, a
 
             })
             .error(function (data, status, headers, config) {
-               console.log('Error publishing new ad!');
+                console.log('Error publishing new ad!');
                 error();
             })
     }
